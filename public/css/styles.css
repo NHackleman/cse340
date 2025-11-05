@@ -3,4 +3,191 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Base styles */
+html {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #fff;
+}
+
+body {
+    max-width: 100%;
+    background-color: white;
+}
+
+#wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Header styles */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
+.tools a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Navigation styles */
+.navigation {
+    display: flex;
+    list-style: none;
+    background-color: #3a3a3a;
+    padding: 0.5rem;
+}
+
+.navigation li {
+    margin-right: 1rem;
+}
+
+.navigation a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem;
+}
+
+.navigation a:hover {
+    background-color: #555;
+}
+
+/* Hero section styles */
+.hero {
+    position: relative;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.hero h1 {
+    margin-bottom: 1rem;
+}
+
+.hero-content {
+    position: relative;
+}
+
+.vehicle-info {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.vehicle-info ul {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.own-today {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+}
+
+/* Reviews and Upgrades section */
+.reviews-upgrades {
+    padding: 1rem;
+}
+
+.delorean-upgrades h2,
+.delorean-reviews h2 {
+    margin-bottom: 1rem;
+}
+
+.upgrade-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.upgrade-item {
+    text-align: center;
+}
+
+.upgrade-image {
+    background-color: #4CAF50;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.upgrade-image img {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+}
+
+.upgrade-item a {
+    color: #000;
+    text-decoration: none;
+}
+
+.delorean-reviews ul {
+    list-style: none;
+}
+
+.delorean-reviews li {
+    margin-bottom: 0.5rem;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+/* Media Query for larger screens */
+@media screen and (min-width: 768px) {
+    #wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .vehicle-info {
+        margin-bottom: 0;
+    }
+
+    .upgrade-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .reviews-upgrades {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+    }
 }
