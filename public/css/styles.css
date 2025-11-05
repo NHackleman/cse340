@@ -97,11 +97,12 @@ body {
 }
 
 .own-today {
-    background-color: #4CAF50;
+    background-color: #2E7D32;  /* Darker green for better contrast */
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
+    font-weight: bold;  /* Added for better visibility */
 }
 
 .hero img {
