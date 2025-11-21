@@ -13,6 +13,8 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const expressLayouts = require("express-ejs-layouts");
 const utilities = require("./utilities/");
 const baseController = require("./controllers/baseController");
+const fs = require("fs");
+const path = require("path");
 
 /* ***********************
  * View Engine and Templates
@@ -28,6 +30,27 @@ app.set("layout", "./layouts/layout"); // not required if using layouts/layout.e
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory routes
 app.use("/inv", inventoryRoute);
+
+// Handle browser requests for favicon.ico to avoid 404s in logs
+app.get("/favicon.ico", (req, res) => {
+	const favPath = path.join(__dirname, "public", "favicon.ico");
+	if (fs.existsSync(favPath)) {
+		return res.sendFile(favPath);
+	}
+	// try site images folder as a fallback
+	const altFav = path.join(
+		__dirname,
+		"public",
+		"images",
+		"site",
+		"favicon.png"
+	);
+	if (fs.existsSync(altFav)) {
+		return res.sendFile(altFav);
+	}
+	// No favicon available - return No Content to avoid 404 handling noise
+	return res.sendStatus(204);
+});
 // Static routes (come after dynamic routes)
 app.use(static);
 // File Not Found Route - must be last route in list
