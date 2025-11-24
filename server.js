@@ -5,16 +5,46 @@
 /* ***********************
  * Require Statements
  *************************/
+const session = require("express-session");
+const pool = require("./database/");
 const express = require("express");
 const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
 const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute");
 const expressLayouts = require("express-ejs-layouts");
 const utilities = require("./utilities/");
 const baseController = require("./controllers/baseController");
 const fs = require("fs");
 const path = require("path");
+const bodyParser = require("body-parser");
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(
+	session({
+		store: new (require("connect-pg-simple")(session))({
+			createTableIfMissing: true,
+			pool,
+		}),
+		secret: process.env.SESSION_SECRET,
+		resave: true,
+		saveUninitialized: true,
+		name: "sessionId",
+	})
+);
+
+// Express Messages Middleware
+app.use(require("connect-flash")());
+app.use(function (req, res, next) {
+	res.locals.messages = require("express-messages")(req, res);
+	next();
+});
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 /* ***********************
  * View Engine and Templates
@@ -30,6 +60,8 @@ app.set("layout", "./layouts/layout"); // not required if using layouts/layout.e
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory routes
 app.use("/inv", inventoryRoute);
+// Account routes
+app.use("/account", accountRoute);
 
 // Handle browser requests for favicon.ico to avoid 404s in logs
 app.get("/favicon.ico", (req, res) => {
