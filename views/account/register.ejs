@@ -1,8 +1,8 @@
-<% if (messages) { %>
+<% if (typeof messages !== 'undefined') { const __msgHtml = messages(); if (__msgHtml && __msgHtml.toString().trim()) { %>
   <div class="messages">
-    <%- messages() %>
+    <%- __msgHtml %>
   </div>
-<% } %>
+<% } } %>
 <% if (errors) { %>
   <ul class="notice">
     <% errors.array().forEach(error => { %>
@@ -16,35 +16,38 @@
 <div class="registration-container">
   <form method="post" action="/account/register" class="registration-form">
     <div class="form-group">
-      <label for="firstname">First Name:</label>
+      <label for="accountFirstname">First Name:</label>
       <input 
         type="text" 
-        id="firstname" 
-        name="firstname" 
+        id="accountFirstname" 
+        name="account_firstname" 
         required 
         placeholder="Enter your first name"
+        value="<%= locals.account_firstname %>"
       />
     </div>
 
     <div class="form-group">
-      <label for="lastname">Last Name:</label>
+      <label for="accountLastname">Last Name:</label>
       <input 
         type="text" 
-        id="lastname" 
-        name="lastname" 
+        id="accountLastname" 
+        name="account_lastname" 
         required 
         placeholder="Enter your last name"
+        value="<%= locals.account_lastname %>"
       />
     </div>
 
     <div class="form-group">
-      <label for="email">Email Address:</label>
+      <label for="accountEmail">Email Address:</label>
       <input 
         type="email" 
-        id="email" 
-        name="email" 
+        id="accountEmail" 
+        name="account_email" 
         required 
         placeholder="Enter your email address"
+        value="<%= locals.account_email %>"
       />
     </div>
 
@@ -62,8 +65,8 @@
       <div class="password-input-wrapper">
         <input 
           type="password" 
-          id="password" 
-          name="password" 
+          id="accountPassword" 
+          name="account_password" 
           required 
           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
           placeholder="Enter your password"
@@ -84,7 +87,7 @@
   // Toggle password visibility
   document.getElementById('togglePassword').addEventListener('click', function(e) {
     e.preventDefault();
-    const passwordInput = document.getElementById('password');
+    const passwordInput = document.getElementById('accountPassword');
     const toggleBtn = this;
     
     if (passwordInput.type === 'password') {
