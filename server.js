@@ -19,6 +19,7 @@ const baseController = require("./controllers/baseController");
 const fs = require("fs");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
@@ -45,6 +46,8 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -89,6 +92,8 @@ app.use(static);
 app.use(async (req, res, next) => {
 	next({ status: 404, message: "Sorry, we appear to have lost that page." });
 });
+
+
 
 /* ***********************
  * Express Error Handler

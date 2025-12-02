@@ -36,5 +36,8 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:invId", invController.buildByInventoryId);
 // Route to intentionally throw a server error for testing
 router.get("/error", invController.throwError);
-
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+// Route to modify inventory
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+router.post("/update/", validate.inventoryRules(), validate.checkUpdateData, utilities.handleErrors(invController.updateInventory))
 module.exports = router;

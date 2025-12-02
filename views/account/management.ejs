@@ -1,0 +1,18 @@
+<% if (typeof messages !== 'undefined') { const __msgHtml = messages(); if (__msgHtml && __msgHtml.toString().trim()) { %>
+  <div class="messages">
+    <%- __msgHtml %>
+  </div>
+<% } } %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<h1><%= title %></h1>
+
+<div class="management-view">
+  <p>You're logged in</p>
+</div>
