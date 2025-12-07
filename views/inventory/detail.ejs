@@ -5,3 +5,10 @@
 <% } %>
 
 <%- vehicle %>
+
+<% if (locals.loggedin) { %>
+    <form action="/watchlist/add" method="post" class="watchlist-form">
+        <input type="hidden" name="inv_id" value="<%= inv_id %>">
+        <button type="submit" class="watchlist-btn">Add to Wishlist</button>
+    </form>
+<% } %>

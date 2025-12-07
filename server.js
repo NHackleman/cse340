@@ -13,6 +13,7 @@ const app = express();
 const static = require("./routes/static");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
+const watchlistRoute = require("./routes/watchlistRoute");
 const expressLayouts = require("express-ejs-layouts");
 const utilities = require("./utilities/");
 const baseController = require("./controllers/baseController");
@@ -65,6 +66,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", inventoryRoute);
 // Account routes
 app.use("/account", accountRoute);
+// Watchlist routes
+app.use("/watchlist", watchlistRoute);
 
 // Handle browser requests for favicon.ico to avoid 404s in logs
 app.get("/favicon.ico", (req, res) => {

@@ -1,0 +1,37 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else { %>
+      <h1>My Wishlist</h1>
+    <% } %>
+    
+    <%- messages() %>
+    
+    <% if (watchlistItems.length > 0) { %>
+        <ul id="inv-display">
+            <% watchlistItems.forEach(function(item) { %>
+                <li>
+                    <a href="/inv/detail/<%= item.inv_id %>" title="View <%= item.inv_make %> <%= item.inv_model %> details">
+                        <img src="<%= item.inv_thumbnail %>" alt="Image of <%= item.inv_make %> <%= item.inv_model %> on CSE Motors" />
+                    </a>
+                    <div class="namePrice">
+                        <hr />
+                        <h2>
+                            <a href="/inv/detail/<%= item.inv_id %>" title="View <%= item.inv_make %> <%= item.inv_model %> details">
+                                <%= item.inv_make %> <%= item.inv_model %>
+                            </a>
+                        </h2>
+                        <span>
+                            <%= new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.inv_price) %>
+                        </span>
+                        
+                        <form action="/watchlist/remove" method="post" class="watchlist-remove-form">
+                            <input type="hidden" name="inv_id" value="<%= item.inv_id %>">
+                            <button type="submit" class="danger-btn">Remove</button>
+                        </form>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p class="notice">Your wishlist is empty.</p>
+    <% } %>

@@ -231,6 +231,7 @@ invCont.buildByInventoryId = async function (req, res, next) {
 			title: `${data.inv_make} ${data.inv_model}`,
 			nav,
 			vehicle: vehicleHTML,
+            inv_id: data.inv_id,
 		});
 	} catch (error) {
 		return next(error);
